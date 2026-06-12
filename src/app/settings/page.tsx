@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "../../utils/supabase/server";
-import SettingsHeader from "./SettingsHeader";
+import Navbar from "../../components/Navbar";
 import SettingsForm from "./SettingsForm";
 
 export default async function SettingsPage() {
@@ -21,7 +21,7 @@ export default async function SettingsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex flex-col transition-colors">
-      <SettingsHeader userProfile={userProfile} />
+        <Navbar userProfile={userProfile} />
       
       <main className="flex-1 p-6 md:p-12 max-w-6xl w-full mx-auto">
         <div className="mb-8 border-b border-gray-200 dark:border-slate-800 pb-6">
