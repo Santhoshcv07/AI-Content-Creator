@@ -2,23 +2,32 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Moon, Sun, Monitor } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 
-export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
+  const { theme, setTheme, systemTheme } = useTheme();
 
-  useEffect(() => setMounted(true), []);
+  // Ensure the component is mounted on the client before rendering to avoid hydration errors
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  if (!mounted) return <div className="w-9 h-9" />; // Placeholder to prevent layout shift
+  if (!mounted) {
+    // Return a fixed-size invisible box to prevent layout shift during hydration
+    return <div className="w-9 h-9" />;
+  }
+
+  // Determine the current active theme (handling 'system' preference)
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800"
-      aria-label="Toggle theme"
+      onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+      className="p-2 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors shadow-sm"
+      aria-label="Toggle Theme"
     >
-      {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+      {currentTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
     </button>
   );
 }
