@@ -8,3 +8,22 @@
     @apply bg-white text-slate-900 transition-colors duration-300;
   }
 }
+
+/* Streaming Cursor Animation */
+@keyframes streaming-cursor-pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Apply pulse to the cursor block character (▍) */
+p:last-child::after {
+  content: "";
+  animation: streaming-cursor-pulse 1s infinite;
+}

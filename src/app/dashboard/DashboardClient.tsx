@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { createClient } from "../../utils/supabase/client";
 import { jsPDF } from "jspdf";
 import Navbar from "../../components/Navbar";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 import { 
   Copy, 
   FileText, 
@@ -16,10 +19,10 @@ import {
   Check,
   Type,
   Clock,
-  LayoutTemplate, // New Icon
+  LayoutTemplate,
   Zap,
   ArrowRight,
-  BarChart2 // New Icon
+  BarChart2
 } from "lucide-react";
 
 interface UserProfile {
@@ -28,7 +31,6 @@ interface UserProfile {
   avatarUrl: string;
 }
 
-// ➕ NEW: Strict TypeScript Interfaces for our real data
 interface AnalyticsData {
   totalGenerations: number;
   totalWords: number;
@@ -56,11 +58,11 @@ const AI_TEMPLATES = [
 ];
 
 export default function DashboardClient({ userProfile, analytics }: DashboardClientProps) {
-  const router = useRouter(); // ➕ For server refreshing
+  const router = useRouter();
   const supabase = createClient();
 
   const [prompt, setPrompt] = useState("");
-  const [activeTemplateId, setActiveTemplateId] = useState<string | null>(null); // ➕ Track Template usage
+  const [activeTemplateId, setActiveTemplateId] = useState<string | null>(null);
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [generationMeta, setGenerationMeta] = useState<GenerationState>({ id: null, isStarred: false });
@@ -112,7 +114,7 @@ export default function DashboardClient({ userProfile, analytics }: DashboardCli
               prompt: prompt,
               result: data.result,
               is_favorite: false,
-              template_id: activeTemplateId // ➕ Save template ID to database!
+              template_id: activeTemplateId
             })
             .select("id")
             .single();
@@ -123,7 +125,6 @@ export default function DashboardClient({ userProfile, analytics }: DashboardCli
         }
         triggerToast("Content compiled successfully!");
         
-        // ➕ NEW: Ask Next.js to quietly re-run page.tsx and fetch the updated analytics!
         router.refresh(); 
       } else {
         setContent("Failed to compile generation. Ensure your API key is configured properly.");
@@ -141,7 +142,6 @@ export default function DashboardClient({ userProfile, analytics }: DashboardCli
     setActiveTemplateId(templateId);
   };
 
-  // Rest of the handlers (handleToggleStar, handleCopy, handleDownloadTXT, handleDownloadPDF) remain identical
   async function handleToggleStar() {
     if (!generationMeta.id) return;
     const targetState = !generationMeta.isStarred;
@@ -164,12 +164,11 @@ export default function DashboardClient({ userProfile, analytics }: DashboardCli
     setTimeout(() => setIsCopied(false), 2000);
   };
 
-  const handleDownloadTXT = () => { /* Same as before */ };
-  const handleDownloadPDF = () => { /* Same as before */ };
+  const handleDownloadTXT = () => { /* Add logic if needed */ };
+  const handleDownloadPDF = () => { /* Add logic if needed */ };
 
   const userFirstName = userProfile.name.split(" ")[0] || "User";
 
-  // Native number formatter for elegant metric displays (e.g. 1500 -> 1.5K)
   const formatter = new Intl.NumberFormat('en-US', { notation: "compact", compactDisplay: "short" });
 
   return (
@@ -209,7 +208,6 @@ export default function DashboardClient({ userProfile, analytics }: DashboardCli
 
           {/* DYNAMIC ANALYTICS GRID */}
           <div className="grid grid-cols-2 gap-4">
-            
             <div className="bg-white dark:bg-slate-900/40 backdrop-blur-md rounded-2xl border border-gray-200/80 dark:border-slate-800 p-5 flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
               <div className="flex justify-between items-start mb-4">
                 <div className="p-2 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 text-blue-500">
@@ -262,7 +260,6 @@ export default function DashboardClient({ userProfile, analytics }: DashboardCli
                 <p className="text-xs text-gray-500 dark:text-slate-500 font-medium mt-0.5">Active Streak</p>
               </div>
             </div>
-
           </div>
         </div>
 
@@ -280,26 +277,41 @@ export default function DashboardClient({ userProfile, analytics }: DashboardCli
               <button
                 key={template.id}
                 onClick={() => handleTemplateClick(template.id, template.prompt)}
-                className={`group flex items-start text-left p-5 bg-white dark:bg-slate-900/40 backdrop-blur-sm rounded-2xl border transition-all duration-300 relative overflow-hidden ${
-                  activeTemplateId === template.id 
-                    ? "border-blue-500 shadow-md ring-1 ring-blue-500/50" 
-                    : "border-gray-200/80 dark:border-slate-800 hover:shadow-lg hover:-translate-y-1"
+                className={`group flex items-start text-left p-5 backdrop-blur-sm rounded-2xl border transition-all duration-300 ease-out relative overflow-hidden ${
+                  activeTemplateId === template.id
+                    ? "bg-blue-50/50 dark:bg-blue-500/5 border-blue-500 dark:border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.15)] dark:shadow-[0_0_20px_rgba(59,130,246,0.1)] ring-1 ring-blue-500/20 scale-[1.02]"
+                    : "bg-white dark:bg-[#0e0e11] border-gray-200 dark:border-white/5 hover:border-blue-500/30 dark:hover:border-blue-400/30 hover:shadow-xl hover:shadow-blue-500/5 hover:scale-[1.02]"
                 }`}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${template.color}`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${template.color} transition-opacity duration-500 ${activeTemplateId === template.id ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`} />
+                
                 <div className="relative z-10 flex w-full">
-                  <div className="w-10 h-10 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 flex items-center justify-center text-lg shrink-0 mr-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                  <div className={`w-10 h-10 rounded-xl border flex items-center justify-center text-lg shrink-0 mr-4 transition-all duration-300 ${
+                    activeTemplateId === template.id
+                      ? "bg-blue-500 text-white border-transparent shadow-md shadow-blue-500/20 scale-110"
+                      : "bg-gray-50 dark:bg-white/5 border-gray-100 dark:border-white/5 text-gray-600 dark:text-slate-300 group-hover:scale-110 group-hover:border-transparent group-hover:bg-white/10"
+                  }`}>
                     {template.icon}
                   </div>
+                  
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-bold text-[15px] text-gray-900 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                    <h3 className={`font-bold text-[15px] transition-colors truncate ${
+                      activeTemplateId === template.id
+                        ? "text-blue-600 dark:text-blue-400"
+                        : "text-gray-900 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400"
+                    }`}>
                       {template.title}
                     </h3>
-                    <p className="text-[13px] text-gray-500 dark:text-slate-500 mt-1 leading-relaxed line-clamp-2 font-medium">
+                    <p className="text-[13px] text-gray-500 dark:text-slate-400 mt-1 leading-relaxed line-clamp-2 font-medium">
                       {template.desc}
                     </p>
                   </div>
-                  <ArrowRight size={16} className="text-gray-300 dark:text-slate-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 shrink-0 self-center" />
+                  
+                  <ArrowRight size={16} className={`transition-all duration-300 shrink-0 self-center ${
+                    activeTemplateId === template.id
+                      ? "text-blue-500 dark:text-blue-400 translate-x-1 opacity-100"
+                      : "text-gray-300 dark:text-slate-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1"
+                  }`} />
                 </div>
               </button>
             ))}
@@ -442,8 +454,45 @@ export default function DashboardClient({ userProfile, analytics }: DashboardCli
                 </div>
               </div>
               
-              <div className="p-6 md:p-8 text-gray-800 dark:text-slate-100 bg-white dark:bg-slate-900/40 text-base font-normal whitespace-pre-wrap leading-relaxed shadow-inner selection:bg-blue-500/20">
-                {content}
+              {/* REACT MARKDOWN RENDERER (CHATGPT STYLE) */}
+              <div className="p-6 md:p-10 lg:p-12 bg-white dark:bg-[#0e0e11] shadow-inner selection:bg-blue-500/20 overflow-x-auto rounded-b-3xl">
+                <div className="
+                  w-full max-w-[750px] mx-auto
+                  text-[15px] sm:text-[16px] text-gray-800 dark:text-[#ececec]
+                  leading-[1.8] antialiased
+                  
+                  /* Paragraphs */
+                  [&_p]:mb-6 [&_p:last-child]:mb-0
+                  
+                  /* Headings */
+                  [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:text-gray-900 dark:[&_h1]:text-white [&_h1]:mt-8 [&_h1]:mb-4
+                  [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-gray-900 dark:[&_h2]:text-white [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:border-b [&_h2]:border-gray-200 dark:[&_h2]:border-white/10 [&_h2]:pb-2
+                  [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-gray-900 dark:[&_h3]:text-slate-100 [&_h3]:mt-6 [&_h3]:mb-3
+                  
+                  /* Lists */
+                  [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6 [&_ul]:space-y-2 [&_ul_li]:pl-1 [&_ul_li]:marker:text-gray-400 dark:[&_ul_li]:marker:text-slate-500
+                  [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-6 [&_ol]:space-y-2 [&_ol_li]:pl-1 [&_ol_li]:marker:text-gray-400 dark:[&_ol_li]:marker:text-slate-500
+                  
+                  /* Inline Formatting */
+                  [&_strong]:font-semibold dark:[&_strong]:text-white
+                  [&_em]:italic dark:[&_em]:text-slate-300
+                  
+                  /* Blockquotes */
+                  [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 dark:[&_blockquote]:border-slate-600 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-6 dark:[&_blockquote]:text-slate-400
+                  
+                  /* Code Blocks */
+                  [&_pre]:bg-gray-100 dark:[&_pre]:bg-[#0D0D12] [&_pre]:border border-gray-200 dark:[&_pre]:border-white/10 [&_pre]:rounded-xl [&_pre]:p-5 [&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:text-[13px] sm:[&_pre]:text-sm [&_pre]:font-mono [&_pre]:shadow-inner
+                  
+                  /* Inline Code */
+                  [&_:not(pre)>code]:font-mono [&_:not(pre)>code]:text-[0.9em] [&_:not(pre)>code]:bg-gray-100 dark:[&_:not(pre)>code]:bg-white/10 [&_:not(pre)>code]:text-blue-600 dark:[&_:not(pre)>code]:text-blue-300 [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:rounded-md [&_:not(pre)>code]:break-words
+                  
+                  /* Dividers */
+                  [&_hr]:border-t [&_hr]:border-gray-200 dark:[&_hr]:border-white/10 [&_hr]:my-8
+                ">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {content}
+                  </ReactMarkdown>
+                </div>
               </div>
             </div>
           )}
