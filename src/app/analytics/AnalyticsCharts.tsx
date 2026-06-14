@@ -28,8 +28,9 @@ export default function AnalyticsCharts({ weeklyData, templateData }: AnalyticsC
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
       
       {/* Chart 1: 7-Day Activity */}
-     <div className="relative group bg-white/[0.03] backdrop-blur-3xl border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.05)] rounded-3xl p-6 transition-all duration-500 hover:bg-white/[0.06] hover:border-white/30">
-        <h3 className="text-sm font-bold text-white mb-6 uppercase tracking-wider">Generations (Last 7 Days)</h3>
+     <div className="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/20 rounded-3xl p-6 shadow-sm dark:shadow-none transition-all duration-300">
+   {/* Your Chart Content */}
+        <h3 className="text-slate-900 dark:text-white font-bold text-lg transition-colors duration-300">Generations (Last 7 Days)</h3>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={weeklyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -58,8 +59,9 @@ export default function AnalyticsCharts({ weeklyData, templateData }: AnalyticsC
       </div>
 
       {/* Chart 2: Template Usage Distribution */}
-    <div className="relative group bg-white/[0.03] backdrop-blur-3xl border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.05)] rounded-3xl p-6 transition-all duration-500 hover:bg-white/[0.06] hover:border-white/30">
-        <h3 className="text-sm font-bold text-white mb-6 uppercase tracking-wider">Template Usage</h3>
+    <div className="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/20 rounded-3xl p-6 shadow-sm dark:shadow-none transition-all duration-300">
+   {/* Your Chart Content */}
+       <h3 className="text-slate-900 dark:text-white font-bold text-lg transition-colors duration-300">Template Usage</h3>
         <div className="h-[300px] w-full">
           {templateData.length === 0 ? (
             <div className="h-full flex items-center justify-center text-slate-400 text-sm">

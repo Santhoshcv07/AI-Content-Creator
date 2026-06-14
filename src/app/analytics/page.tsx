@@ -106,7 +106,7 @@ export default async function AnalyticsPage() {
             <span className="text-slate-400 text-sm font-semibold mb-2 flex items-center gap-2">
               <span>📚</span> Total Generations
             </span>
-            <span className="text-4xl font-extrabold text-white">
+            <span className="text-4xl font-extrabold text-blue-400">
               {safeGenerations.length}
             </span>
           </div>
