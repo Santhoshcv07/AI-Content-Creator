@@ -1,16 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "../../utils/supabase/client";
 import Navbar from "../../components/Navbar";
-import { 
-  Search, 
-  Star, 
-  Clock, 
-  Copy, 
-  Trash2, 
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import {
+  Search,
+  Star,
+  Clock,
+  Copy,
+  Trash2,
   Check,
-  FileText
+  FileText,
+  AlertTriangle
 } from "lucide-react";
 
 interface UserProfile {
@@ -40,6 +43,8 @@ export default function HistoryClient({ userProfile, initialGenerations }: Histo
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"all" | "favorites">("all");
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+const [itemToDelete, setItemToDelete] = useState<string | null>(null);
 
   // Derived State: Filter the generations based on Search and Tabs
   const filteredGenerations = generations.filter((gen) => {
@@ -82,8 +87,7 @@ export default function HistoryClient({ userProfile, initialGenerations }: Histo
 
   // Action: Delete Generation
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this generation?")) return;
-
+    
     // Optimistic UI Update
     setGenerations((prev) => prev.filter((g) => g.id !== id));
 
@@ -91,6 +95,9 @@ export default function HistoryClient({ userProfile, initialGenerations }: Histo
       .from("generations")
       .delete()
       .eq("id", id);
+      
+      console.log("Deleting ID:", id);
+console.log("Delete Error:", error);
 
     if (error) {
       console.error("Failed to delete generation");
@@ -201,8 +208,20 @@ export default function HistoryClient({ userProfile, initialGenerations }: Histo
                       {copiedId === gen.id ? <Check size={16} className="text-green-500" /> : <Copy size={16} />}
                     </button>
                     <button 
-                      onClick={() => handleDelete(gen.id)}
-                      className="p-2 text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/30 hover:text-red-500 rounded-lg transition-colors"
+                     onClick={() => {
+  setItemToDelete(gen.id);
+  setIsDeleteModalOpen(true);
+}}
+                     className="
+p-2 text-gray-400
+rounded-lg
+transition-all duration-300
+hover:bg-red-500/10
+hover:text-red-500
+hover:scale-110
+hover:rotate-6
+hover:shadow-lg
+"
                       title="Delete generation"
                     >
                       <Trash2 size={16} />
@@ -211,15 +230,92 @@ export default function HistoryClient({ userProfile, initialGenerations }: Histo
                 </div>
 
                 {/* Card Body: Result */}
-                <div className="p-6 text-sm text-gray-700 dark:text-slate-300 whitespace-pre-wrap leading-relaxed max-h-96 overflow-y-auto">
-                  {gen.result}
-                </div>
+                <div className="p-6 text-[15px] sm:text-base text-gray-800 dark:text-[#ececec] font-sans antialiased whitespace-pre-wrap leading-[1.8] max-h-96 overflow-y-auto custom-scrollbar">
+  {gen.result
+    ? gen.result
+        .replace(/(\*\*|__)(.*?)\1/g, "$2")         // Remove bold
+        .replace(/(\*|_)(.*?)\1/g, "$2")            // Remove italics
+        .replace(/~~(.*?)~~/g, "$1")                // Remove strikethrough
+        .replace(/`{3}[\s\S]*?`{3}/g, "[Code Block]") // Collapse code blocks
+        .replace(/`(.+?)`/g, "$1")                  // Remove inline code
+        .replace(/^#+\s+/gm, "")                    // Remove headings
+        .replace(/^\s*[*\-+]\s+/gm, "• ")           // Clean bullet points
+        .replace(/^\s*\d+\.\s+/gm, "")              // Remove numbered lists (optional, keeps numbers out)
+        .replace(/!\[.*?\]\(.*?\)/g, "[Image]")     // Remove images
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")    // Remove links, keep text
+        .replace(/^>+\s?/gm, "")                    // Remove blockquotes
+        .replace(/^-{3,}/gm, "")                    // Remove horizontal rules
+        .trim()
+    : "No content generated."}
+</div>
               </div>
             ))
           )}
         </div>
 
       </main>
+      {isDeleteModalOpen && (
+  <div
+    className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+    onClick={() => setIsDeleteModalOpen(false)}
+  >
+    <div
+     className="
+bg-[#0e0e11]
+border border-white/10
+rounded-3xl
+p-8
+w-full max-w-sm
+shadow-2xl
+shadow-red-500/10
+animate-in zoom-in-95 duration-300
+"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="flex justify-center mb-4">
+        <div className="w-14 h-14 rounded-full bg-red-500/10 flex items-center justify-center">
+          <AlertTriangle className="text-red-500" />
+        </div>
+      </div>
+
+      <h3 className="text-xl font-bold text-white text-center mb-2">
+        Delete Generation?
+      </h3>
+
+      <p className="text-slate-400 text-center mb-6">
+        This action cannot be undone.
+      </p>
+
+      <div className="flex gap-3">
+        <button
+          onClick={() => setIsDeleteModalOpen(false)}
+          className="flex-1 py-3 rounded-xl bg-white/5 text-slate-300"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={() => {
+            if (itemToDelete) handleDelete(itemToDelete);
+            setIsDeleteModalOpen(false);
+          }}
+          className="
+flex-1 py-3 rounded-xl
+bg-red-600 text-white font-semibold
+transition-all duration-300 ease-out
+hover:bg-red-500
+hover:shadow-[0_0_25px_rgba(239,68,68,0.45)]
+hover:scale-105
+active:scale-95
+cursor-pointer
+"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }

@@ -328,7 +328,7 @@ export default function DashboardClient({ userProfile, analytics }: DashboardCli
               <div className="flex items-center gap-3 text-[12px] font-semibold text-gray-400 dark:text-slate-500 bg-white dark:bg-slate-800 px-3 py-1 rounded-lg border border-gray-100 dark:border-slate-700 shadow-sm">
                 <span>{inputMetrics.words} words</span>
                 <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-600" />
-                <span>{inputMetrics.characters} chars</span>
+                <span>{inputMetrics.characters} / 1000 chars</span>
               </div>
             </div>
             
@@ -341,6 +341,7 @@ export default function DashboardClient({ userProfile, analytics }: DashboardCli
                   setPrompt(e.target.value);
                   if (e.target.value.trim() === "") setActiveTemplateId(null);
                 }}
+                maxLength={1000}
                 disabled={isLoading}
               />
             </div>

@@ -90,40 +90,51 @@ export default async function AnalyticsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex flex-col transition-colors">
+  <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex flex-col transition-colors">
      <Navbar userProfile={userProfile} />
       
       <main className="flex-1 p-6 md:p-12 max-w-5xl w-full mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Performance Analytics</h1>
-          <p className="text-gray-500 mt-1">Track your content generation volume and workspace usage.</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Performance Analytics</h1>
+         <p className="text-gray-500 dark:text-slate-400 mt-1"> Track your content generation volume and workspace usage.</p>
         </div>
 
-        {/* Top Section: Metric Cards */}
+       {/* Top Section: Metric Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col">
-            <span className="text-gray-500 text-sm font-semibold mb-2 flex items-center gap-2">
+          <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10">
+            <span className="text-slate-400 text-sm font-semibold mb-2 flex items-center gap-2">
               <span>📚</span> Total Generations
             </span>
-            <span className="text-4xl font-extrabold text-gray-900">{safeGenerations.length}</span>
+            <span className="text-4xl font-extrabold text-white">
+              {safeGenerations.length}
+            </span>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col">
-            <span className="text-gray-500 text-sm font-semibold mb-2 flex items-center gap-2">
+          
+          <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10">
+            <span className="text-slate-400 text-sm font-semibold mb-2 flex items-center gap-2">
               <span>⚡</span> Generated Today
             </span>
-            <span className="text-4xl font-extrabold text-blue-600">{todayCount}</span>
+            <span className="text-4xl font-extrabold text-blue-400">
+              {todayCount}
+            </span>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col">
-            <span className="text-gray-500 text-sm font-semibold mb-2 flex items-center gap-2">
+          
+          <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10">
+            <span className="text-slate-400 text-sm font-semibold mb-2 flex items-center gap-2">
               <span>📅</span> Past 7 Days
             </span>
-            <span className="text-4xl font-extrabold text-purple-600">{weekCount}</span>
+            <span className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              {weekCount}
+            </span>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col">
-            <span className="text-gray-500 text-sm font-semibold mb-2 flex items-center gap-2">
+          
+          <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10">
+            <span className="text-slate-400 text-sm font-semibold mb-2 flex items-center gap-2">
               <span>🎨</span> Templates Used
             </span>
-            <span className="text-4xl font-extrabold text-green-600">{templateCount}</span>
+            <span className="text-4xl font-extrabold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+              {templateCount}
+            </span>
           </div>
         </div>
 
@@ -131,26 +142,26 @@ export default async function AnalyticsPage() {
         <AnalyticsCharts weeklyData={weeklyData} templateData={templateData} />
 
         {/* Bottom Section: Recent Activity Table */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="px-6 py-5 border-b border-gray-200 bg-gray-50/50">
-            <h3 className="text-lg font-bold text-gray-900">Recent Activity</h3>
+        <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
+          <div className="px-6 py-5 border-b border-slate-800 bg-slate-900/50">
+            <h3 className="text-lg font-bold text-white">Recent Activity</h3>
           </div>
           
           {recentActivity.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">No activity found yet.</div>
+            <div className="p-8 text-center text-slate-400">No activity found yet.</div>
           ) : (
-            <ul className="divide-y divide-gray-100">
+            <ul className="divide-y divide-slate-800">
               {recentActivity.map((item) => (
-                <li key={item.id} className="p-6 hover:bg-gray-50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <li key={item.id} className="p-6 hover:bg-slate-800 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">
+                    <p className="text-sm font-medium text-white truncate">
                       {item.prompt}
                     </p>
-                    <p className="text-xs text-gray-500 mt-1 truncate max-w-2xl">
+                    <p className="text-xs text-slate-400 mt-1 truncate max-w-2xl">
                       {item.result.replace(/\n/g, ' ').substring(0, 100)}...
                     </p>
                   </div>
-                  <div className="text-xs font-semibold text-gray-400 bg-gray-100 px-3 py-1.5 rounded-lg whitespace-nowrap">
+                  <div className="text-xs font-semibold text-slate-400 bg-slate-900/50 px-3 py-1.5 rounded-lg whitespace-nowrap">
                     {new Date(item.created_at).toLocaleDateString(undefined, { 
                       month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' 
                     })}

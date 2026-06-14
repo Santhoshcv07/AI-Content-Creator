@@ -28,8 +28,8 @@ export default function AnalyticsCharts({ weeklyData, templateData }: AnalyticsC
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
       
       {/* Chart 1: 7-Day Activity */}
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-        <h3 className="text-sm font-bold text-gray-900 mb-6 uppercase tracking-wider">Generations (Last 7 Days)</h3>
+      <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+        <h3 className="text-sm font-bold text-white mb-6 uppercase tracking-wider">Generations (Last 7 Days)</h3>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={weeklyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -48,7 +48,7 @@ export default function AnalyticsCharts({ weeklyData, templateData }: AnalyticsC
                 tick={{ fill: '#64748b', fontSize: 12 }} 
               />
               <Tooltip 
-                cursor={{ fill: '#f8fafc' }}
+                cursor={false}
                 contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
               />
               <Bar dataKey="count" fill="#3b82f6" radius={[4, 4, 0, 0]} maxBarSize={40} />
@@ -58,11 +58,11 @@ export default function AnalyticsCharts({ weeklyData, templateData }: AnalyticsC
       </div>
 
       {/* Chart 2: Template Usage Distribution */}
-      <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-        <h3 className="text-sm font-bold text-gray-900 mb-6 uppercase tracking-wider">Template Usage</h3>
+      <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
+        <h3 className="text-sm font-bold text-white mb-6 uppercase tracking-wider">Template Usage</h3>
         <div className="h-[300px] w-full">
           {templateData.length === 0 ? (
-            <div className="h-full flex items-center justify-center text-gray-400 text-sm">
+            <div className="h-full flex items-center justify-center text-slate-400 text-sm">
               No template data available yet.
             </div>
           ) : (
