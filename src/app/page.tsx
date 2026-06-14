@@ -140,7 +140,7 @@ export default function LandingPage() {
   const viewportSettings = { once: true, amount: 0.1 };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 dark:bg-[#0A0A0A] dark:text-slate-200 font-sans selection:bg-blue-500/30 overflow-x-hidden relative transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-[#0A0A0A] dark:text-slate-200 font-sans selection:bg-blue-500/30 overflow-x-hidden relative transition-colors duration-300">
       
       <style>{`
         @keyframes slide-right {
@@ -168,15 +168,17 @@ export default function LandingPage() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="fixed w-full border-b border-slate-200 dark:border-white/5 bg-white/90 dark:bg-[#0A0A0A]/80 backdrop-blur-xl z-50 transition-colors duration-300"
+        className="fixed w-full border-b border-slate-200 dark:border-white/5 bg-slate-50/90 dark:bg-[#0A0A0A]/80 backdrop-blur-xl z-50 transition-colors duration-300"
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
-          <div className="font-extrabold text-xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+          <Link href="/dashboard" className="flex items-center gap-2.5 group">
+            <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-sm shadow-blue-500/30 group-hover:shadow-blue-500/50 group-hover:scale-105 transition-all duration-300">
               <Sparkles size={16} className="text-white" strokeWidth={2.5} />
             </div>
-            AI Workspace
-          </div>
+            <span className="font-extrabold text-[19px] tracking-tight text-gray-900 dark:text-white transition-colors">
+              AI <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">Content Creator</span>
+            </span>
+          </Link>
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <Link href="/login" className="text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white transition-colors">
@@ -250,8 +252,8 @@ export default function LandingPage() {
           </motion.p>
           
           <motion.div variants={fadeUpVariant} className="marquee-group relative w-full flex overflow-hidden">
-            <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-linear-to-r from-white dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-linear-to-l from-white dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-linear-to-r from-slate-50 dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-linear-to-l from-slate-50 dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
 
             <div className="flex w-max animate-slide-right">
               {[
@@ -304,7 +306,7 @@ export default function LandingPage() {
                 alt="AI Workspace Dashboard Platform Screenshot" 
                 className="w-full h-auto object-cover transform hover:scale-[1.01] transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-white dark:from-[#0A0A0A] to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-slate-50 dark:from-[#0A0A0A] to-transparent pointer-events-none" />
             </div>
           </motion.div>
         </motion.div>
@@ -605,8 +607,13 @@ export default function LandingPage() {
       >
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-6 gap-8 mb-16">
           <div className="col-span-2 lg:col-span-2">
-            <div className="font-extrabold text-xl text-slate-950 dark:text-white tracking-tight flex items-center gap-2 mb-4">
-              <Sparkles size={16} className="text-blue-600 dark:text-blue-500" strokeWidth={2.5} /> AI Workspace
+            <div className="flex items-center gap-2.5 group mb-4">
+              <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-sm shadow-blue-500/30 group-hover:shadow-blue-500/50 group-hover:scale-105 transition-all duration-300">
+                <Sparkles size={16} className="text-white" strokeWidth={2.5} />
+              </div>
+              <span className="font-extrabold text-[19px] tracking-tight text-gray-900 dark:text-white transition-colors">
+                AI <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">Content Creator</span>
+              </span>
             </div>
             <p className="text-sm text-slate-600 dark:text-slate-500 max-w-xs leading-relaxed">
               Building the future of generative content architecture. Engineered for scale, speed, and precision.
