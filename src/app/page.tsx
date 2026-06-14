@@ -140,7 +140,7 @@ export default function LandingPage() {
   const viewportSettings = { once: true, amount: 0.1 };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-[#0A0A0A] dark:text-slate-200 font-sans selection:bg-blue-500/30 overflow-x-hidden relative transition-colors duration-300">
+   <div className="min-h-screen bg-slate-100 text-slate-900 dark:bg-[#0A0A0A] dark:text-slate-200 font-sans selection:bg-blue-500/30 overflow-x-hidden relative transition-colors duration-300">
       
       <style>{`
         @keyframes slide-right {
@@ -168,7 +168,7 @@ export default function LandingPage() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="fixed w-full border-b border-slate-200 dark:border-white/5 bg-slate-50/90 dark:bg-[#0A0A0A]/80 backdrop-blur-xl z-50 transition-colors duration-300"
+       className="fixed w-full border-b border-slate-200/60 dark:border-white/5 bg-slate-100/80 dark:bg-[#0A0A0A]/80 backdrop-blur-xl z-50 transition-colors duration-300"
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
           <Link href="/dashboard" className="flex items-center gap-2.5 group">
@@ -252,8 +252,8 @@ export default function LandingPage() {
           </motion.p>
           
           <motion.div variants={fadeUpVariant} className="marquee-group relative w-full flex overflow-hidden">
-            <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-linear-to-r from-slate-50 dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-linear-to-l from-slate-50 dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-linear-to-r from-slate-100 dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-linear-to-l from-slate-100 dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
 
             <div className="flex w-max animate-slide-right">
               {[
@@ -306,7 +306,7 @@ export default function LandingPage() {
                 alt="AI Workspace Dashboard Platform Screenshot" 
                 className="w-full h-auto object-cover transform hover:scale-[1.01] transition-transform duration-700 ease-out"
               />
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-slate-50 dark:from-[#0A0A0A] to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-slate-100 dark:from-[#0A0A0A] to-transparent pointer-events-none" />
             </div>
           </motion.div>
         </motion.div>
