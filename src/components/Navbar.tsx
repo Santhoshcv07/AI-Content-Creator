@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "../utils/supabase/client";
@@ -14,6 +14,16 @@ interface UserProfile {
 }
 
 export default function Navbar({ userProfile }: { userProfile: UserProfile }) {
+  // Add this inside your component function
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const router = useRouter();
   const pathname = usePathname();
   const supabase = createClient();
@@ -40,22 +50,22 @@ export default function Navbar({ userProfile }: { userProfile: UserProfile }) {
   }
 
   return (
-    <nav className="w-full sticky top-0 z-50 bg-white/75 dark:bg-[#0A0A0A]/75 backdrop-blur-xl border-b border-gray-200/50 dark:border-white/10 transition-colors duration-300">
+    <nav className="sticky top-0 z-50 bg-[#050505]/70 backdrop-blur-xl border-b border-white/10 transition-colors duration-500">
+      
       <div className="px-6 py-4 flex justify-between items-center w-full max-w-[1400px] mx-auto">
         
         {/* Left Side: Logo & Desktop Links */}
         <div className="flex items-center gap-6">
           
-          {/* Premium Logo */}
+        {/* Custom Black/White Logo */}
           <Link href="/dashboard" className="flex items-center gap-2.5 group mr-2">
-            <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-sm shadow-blue-500/30 group-hover:shadow-blue-500/50 group-hover:scale-105 transition-all duration-300">
-              <Sparkles size={16} className="text-white" strokeWidth={2.5} />
+            <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-black dark:bg-white shadow-sm group-hover:scale-105 transition-all duration-300">
+              <Sparkles size={16} className="text-white dark:text-black" strokeWidth={2.5} />
             </div>
             <span className="font-extrabold text-[19px] tracking-tight text-gray-900 dark:text-white transition-colors">
-              AI <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">Content Creator</span>
+              AI <span className="text-blue-600 dark:text-blue-400">Content Creator</span>
             </span>
           </Link>
-          
           {/* Vertical Divider */}
           <div className="hidden md:block w-px h-5 bg-gray-300 dark:bg-white/10"></div>
 

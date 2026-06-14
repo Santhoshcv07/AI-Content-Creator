@@ -55,13 +55,16 @@ export default function LoginPage() {
       <div className="hidden lg:flex w-[55%] relative flex-col justify-center items-center p-12 border-r border-white/5 overflow-hidden z-10">
         
         {/* Branding Header */}
-        <div className="absolute top-8 left-8 flex items-center gap-2 font-extrabold text-xl tracking-tight text-white z-20">
-          <div className="w-8 h-8 rounded-lg bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.5)]">
-            <Sparkles size={16} className="text-white" strokeWidth={2.5} />
-          </div>
-          AI Workspace
-        </div>
-
+        <div className="flex items-center gap-2.5 group mb-8">
+  {/* Custom Black/White Logo */}
+  <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-black dark:bg-white shadow-sm transition-all duration-300">
+    <Sparkles size={16} className="text-white dark:text-black" strokeWidth={2.5} />
+  </div>
+  {/* Text Branding */}
+  <span className="font-extrabold text-[19px] tracking-tight text-gray-900 dark:text-white transition-colors">
+    AI <span className="text-blue-600 dark:text-blue-400">Content Creator</span>
+  </span>
+</div>
         {/* Realistic Dashboard Preview in Glass Window */}
         <motion.div 
           initial={{ opacity: 0, x: -40 }}

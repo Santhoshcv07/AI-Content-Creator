@@ -106,7 +106,9 @@ console.log("Delete Error:", error);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex flex-col transition-colors">
+   <div className="min-h-screen bg-slate-50 dark:bg-[#050505] text-slate-900 dark:text-white transition-colors duration-500 p-6 md:p-8">
+  
+
       <Navbar userProfile={userProfile} />
 
       <main className="flex-1 p-4 md:p-12 max-w-5xl w-full mx-auto space-y-8">
@@ -114,7 +116,7 @@ console.log("Delete Error:", error);
         {/* Header & Controls */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div>
-            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">Workspace History</h1>
+            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">Content History</h1>
             <p className="text-sm text-gray-500 dark:text-slate-400">View, search, and manage all your past AI generations.</p>
           </div>
 
@@ -158,7 +160,7 @@ console.log("Delete Error:", error);
         {/* Content Feed */}
         <div className="space-y-6">
           {filteredGenerations.length === 0 ? (
-            <div className="bg-white dark:bg-slate-900/40 rounded-3xl border border-dashed border-gray-200 dark:border-slate-800 p-12 text-center transition-colors">
+           <div className="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/20 backdrop-blur-3xl shadow-sm dark:shadow-none rounded-3xl p-6 transition-all duration-300">
               <FileText size={32} className="mx-auto text-gray-300 dark:text-slate-600 mb-4" />
               <h3 className="text-sm font-bold text-gray-900 dark:text-slate-200 mb-1">No results found</h3>
               <p className="text-xs text-gray-400 dark:text-slate-500">

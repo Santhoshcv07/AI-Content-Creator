@@ -140,7 +140,18 @@ export default function LandingPage() {
   const viewportSettings = { once: true, amount: 0.1 };
 
   return (
-   <div className="min-h-screen bg-slate-100 text-slate-900 dark:bg-[#0A0A0A] dark:text-slate-200 font-sans selection:bg-blue-500/30 overflow-x-hidden relative transition-colors duration-300">
+<div className="min-h-screen text-slate-900 dark:text-slate-200 font-sans selection:bg-blue-500/30 overflow-x-hidden relative">
+      
+      {/* --- FULL PAGE GLASSMORPHISM BACKGROUND --- */}
+      <div className="fixed inset-0 z-[-1] bg-slate-100 dark:bg-[#0A0A0A] transition-colors duration-500 overflow-hidden">
+        
+        {/* Animated Ambient Glowing Orbs */}
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-blue-400/30 dark:bg-blue-600/20 blur-[120px] animate-pulse pointer-events-none" style={{ animationDuration: '7s' }} />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-indigo-400/30 dark:bg-indigo-600/20 blur-[120px] animate-pulse pointer-events-none" style={{ animationDuration: '11s' }} />
+        
+        {/* The Frosted Glass Overlay */}
+        <div className="absolute inset-0 bg-white/50 dark:bg-black/40 backdrop-blur-[80px] pointer-events-none" />
+      </div>
       
       <style>{`
         @keyframes slide-right {
@@ -168,15 +179,15 @@ export default function LandingPage() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-       className="fixed w-full border-b border-slate-200/60 dark:border-white/5 bg-slate-100/80 dark:bg-[#0A0A0A]/80 backdrop-blur-xl z-50 transition-colors duration-300"
+        className="fixed top-0 w-full border-b border-slate-200/50 dark:border-white/5 bg-slate-100/30 dark:bg-[#0A0A0A]/30 backdrop-blur-md z-50 transition-colors duration-300"
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
-          <Link href="/dashboard" className="flex items-center gap-2.5 group">
-            <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-sm shadow-blue-500/30 group-hover:shadow-blue-500/50 group-hover:scale-105 transition-all duration-300">
-              <Sparkles size={16} className="text-white" strokeWidth={2.5} />
+         <Link href="/dashboard" className="flex items-center gap-2.5 group">
+            <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-black dark:bg-white shadow-sm group-hover:scale-105 transition-all duration-300">
+              <Sparkles size={16} className="text-white dark:text-black" strokeWidth={2.5} />
             </div>
             <span className="font-extrabold text-[19px] tracking-tight text-gray-900 dark:text-white transition-colors">
-              AI <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">Content Creator</span>
+              AI <span className="text-blue-600 dark:text-blue-400">Content Creator</span>
             </span>
           </Link>
           <div className="flex items-center gap-4">
@@ -252,9 +263,8 @@ export default function LandingPage() {
           </motion.p>
           
           <motion.div variants={fadeUpVariant} className="marquee-group relative w-full flex overflow-hidden">
-            <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-linear-to-r from-slate-100 dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+           <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-linear-to-r from-slate-100 dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-linear-to-l from-slate-100 dark:from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
-
             <div className="flex w-max animate-slide-right">
               {[
                 { name: "Next.js", icon: TerminalSquare },
@@ -606,14 +616,17 @@ export default function LandingPage() {
         className="border-t border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-[#0A0A0A] pt-16 pb-8 transition-colors duration-300"
       >
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-6 gap-8 mb-16">
-          <div className="col-span-2 lg:col-span-2">
+       <div className="col-span-2 lg:col-span-2">
             <div className="flex items-center gap-2.5 group mb-4">
-              <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-sm shadow-blue-500/30 group-hover:shadow-blue-500/50 group-hover:scale-105 transition-all duration-300">
-                <Sparkles size={16} className="text-white" strokeWidth={2.5} />
+              <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-black dark:bg-white shadow-sm group-hover:scale-105 transition-all duration-300">
+                <Sparkles size={16} className="text-white dark:text-black" strokeWidth={2.5} />
               </div>
               <span className="font-extrabold text-[19px] tracking-tight text-gray-900 dark:text-white transition-colors">
-                AI <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">Content Creator</span>
+                AI <span className="text-blue-600 dark:text-blue-400">Content Creator</span>
               </span>
+            
+            
+            
             </div>
             <p className="text-sm text-slate-600 dark:text-slate-500 max-w-xs leading-relaxed">
               Building the future of generative content architecture. Engineered for scale, speed, and precision.

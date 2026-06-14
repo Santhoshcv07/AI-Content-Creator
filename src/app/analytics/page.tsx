@@ -90,10 +90,11 @@ export default async function AnalyticsPage() {
   };
 
   return (
-  <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex flex-col transition-colors">
+ 
+    <div className="min-h-screen bg-[#0A0A0A] text-white p-6 transition-colors duration-500">
      <Navbar userProfile={userProfile} />
       
-      <main className="flex-1 p-6 md:p-12 max-w-5xl w-full mx-auto">
+      <main className="min-h-screen bg-slate-50 dark:bg-[#050505] text-slate-900 dark:text-white p-6 transition-colors duration-500">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Performance Analytics</h1>
          <p className="text-gray-500 dark:text-slate-400 mt-1"> Track your content generation volume and workspace usage.</p>
@@ -101,7 +102,7 @@ export default async function AnalyticsPage() {
 
        {/* Top Section: Metric Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10">
+   <div className="relative group bg-white/50 backdrop-blur-xl border border-slate-200 dark:bg-white/[0.03] dark:backdrop-blur-3xl dark:border-white/20 shadow-lg dark:shadow-[0_0_20px_rgba(255,255,255,0.05)] rounded-3xl p-6 transition-all duration-500">
             <span className="text-slate-400 text-sm font-semibold mb-2 flex items-center gap-2">
               <span>📚</span> Total Generations
             </span>
@@ -110,7 +111,7 @@ export default async function AnalyticsPage() {
             </span>
           </div>
           
-          <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10">
+          <div className="relative group bg-white/50 backdrop-blur-xl border border-slate-200 dark:bg-white/[0.03] dark:backdrop-blur-3xl dark:border-white/20 shadow-lg dark:shadow-[0_0_20px_rgba(255,255,255,0.05)] rounded-3xl p-6 transition-all duration-500">
             <span className="text-slate-400 text-sm font-semibold mb-2 flex items-center gap-2">
               <span>⚡</span> Generated Today
             </span>
@@ -119,7 +120,7 @@ export default async function AnalyticsPage() {
             </span>
           </div>
           
-          <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10">
+          <div className="relative group bg-white/50 backdrop-blur-xl border border-slate-200 dark:bg-white/[0.03] dark:backdrop-blur-3xl dark:border-white/20 shadow-lg dark:shadow-[0_0_20px_rgba(255,255,255,0.05)] rounded-3xl p-6 transition-all duration-500">
             <span className="text-slate-400 text-sm font-semibold mb-2 flex items-center gap-2">
               <span>📅</span> Past 7 Days
             </span>
@@ -128,7 +129,7 @@ export default async function AnalyticsPage() {
             </span>
           </div>
           
-          <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10">
+          <div className="relative group bg-white/50 backdrop-blur-xl border border-slate-200 dark:bg-white/[0.03] dark:backdrop-blur-3xl dark:border-white/20 shadow-lg dark:shadow-[0_0_20px_rgba(255,255,255,0.05)] rounded-3xl p-6 transition-all duration-500">
             <span className="text-slate-400 text-sm font-semibold mb-2 flex items-center gap-2">
               <span>🎨</span> Templates Used
             </span>

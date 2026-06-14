@@ -28,7 +28,7 @@ export default function AnalyticsCharts({ weeklyData, templateData }: AnalyticsC
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
       
       {/* Chart 1: 7-Day Activity */}
-      <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+     <div className="relative group bg-white/[0.03] backdrop-blur-3xl border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.05)] rounded-3xl p-6 transition-all duration-500 hover:bg-white/[0.06] hover:border-white/30">
         <h3 className="text-sm font-bold text-white mb-6 uppercase tracking-wider">Generations (Last 7 Days)</h3>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
@@ -58,7 +58,7 @@ export default function AnalyticsCharts({ weeklyData, templateData }: AnalyticsC
       </div>
 
       {/* Chart 2: Template Usage Distribution */}
-      <div className="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
+    <div className="relative group bg-white/[0.03] backdrop-blur-3xl border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.05)] rounded-3xl p-6 transition-all duration-500 hover:bg-white/[0.06] hover:border-white/30">
         <h3 className="text-sm font-bold text-white mb-6 uppercase tracking-wider">Template Usage</h3>
         <div className="h-[300px] w-full">
           {templateData.length === 0 ? (
