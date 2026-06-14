@@ -9,7 +9,12 @@ export async function POST(request) {
   try {
     const body = await request.json();
     const { prompt } = body;
-
+console.log(
+  "API Key Loaded:",
+  process.env.GEMINI_API_KEY
+    ? process.env.GEMINI_API_KEY.slice(0, 10)
+    : "NO KEY"
+);
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt,
@@ -18,12 +23,15 @@ export async function POST(request) {
     return NextResponse.json({
       result: response.text,
     });
-  } catch (error) {
-    console.error("Gemini Error:", error);
+ } catch (error) {
+  console.error("Gemini Error:", error);
+  console.log("Using Gemini Key:", process.env.GEMINI_API_KEY?.slice(0, 10));
 
-    return NextResponse.json(
-      { error: "Failed to generate content" },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json(
+    {
+      error: error?.message || "Unknown Gemini Error",
+    },
+    { status: 500 }
+  );
+}
 }
