@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { jsPDF } from "jspdf";
+import Link from "next/link";
 import { 
   Copy, 
   Check, 

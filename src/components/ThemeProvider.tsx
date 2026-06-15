@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import Link from "next/link";
 
 export function ThemeProvider({
   children,

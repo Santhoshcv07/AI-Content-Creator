@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "../../utils/supabase/server";
 import HistoryClient from "./HistoryClient";
+import Link from "next/link";
 
 export default async function HistoryPage() {
   const supabase = await createClient();

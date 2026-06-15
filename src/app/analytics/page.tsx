@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "../../utils/supabase/server";
 import Navbar from "../../components/Navbar";
 import AnalyticsCharts from "./AnalyticsCharts"; // ➕ Import the new charts
+import Link from "next/link";
 
 export default async function AnalyticsPage() {
   const supabase = await createClient();

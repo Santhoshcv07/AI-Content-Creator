@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "../../utils/supabase/server";
 import Navbar from "../../components/Navbar";
 import SettingsForm from "./SettingsForm";
+import Link from "next/link";
 
 export default async function SettingsPage() {
   const supabase = await createClient();

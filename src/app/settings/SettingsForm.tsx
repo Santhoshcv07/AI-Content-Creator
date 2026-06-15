@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "../../utils/supabase/client";
 import { Upload, X, Loader2, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 
 interface SettingsFormProps {
   initialName: string;

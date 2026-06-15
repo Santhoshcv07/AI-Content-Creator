@@ -1,5 +1,6 @@
 import { streamText } from "ai";
 import { google } from "@ai-sdk/google";
+import Link from "next/link";
 
 // Allow Vercel Edge functions to run longer for streaming
 export const maxDuration = 30;

@@ -5,6 +5,7 @@ import { createClient } from "../../utils/supabase/client";
 import Navbar from "../../components/Navbar";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import Link from "next/link";
 import {
   Search,
   Star,

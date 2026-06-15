@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createClient } from "../../utils/supabase/client";
 import Link from "next/link";
 import { motion } from "framer-motion";
+
 import { 
   Sparkles, 
   Loader2, 
