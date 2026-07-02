@@ -1,6 +1,6 @@
 # ✍️ AI-Content-Creator
 
-An AI-powered content generation platform built to help users quickly create high-quality text and media.
+An arr the AI-powered content generation platform built to help users quickly create high-quality text and media.
 
 
 ## 🚀 Tech Stack
