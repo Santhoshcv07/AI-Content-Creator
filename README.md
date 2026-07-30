@@ -140,11 +140,6 @@ This project is optimized for deployment on **Vercel**.
 
 ## 🔮 Future Scope
 
-- [ ] **Multi-Model Support**: Integration with other LLMs (OpenAI, Anthropic).
-- [ ] **Team Collaboration**: Shared workspaces for teams to collaborate on content.
-- [ ] **Advanced Analytics**: Detailed tracking of content performance and generation history.
-- [ ] **More Export Formats**: Support for Word (DOCX) and Notion integrations.
-- [ ] **Custom AI Personas**: Allow users to train the AI on their specific brand voice.
 
 ---
 
