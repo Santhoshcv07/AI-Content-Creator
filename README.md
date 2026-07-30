@@ -21,6 +21,8 @@ An intelligent, full-stack application that leverages Google's Gemini AI to gene
 ---
 
 ## 🧐 What it does
+**AI Content Creator** is a modern web application designed to streamline the content creation process. Whether you need blog posts, marketing copy, or technical documentation, the app uses advanced AI (Google Gemini) to generate structured, high-quality text. It features robust user authentication and data persistence via Supabase, seamless Markdown rendering, PDF exports, and a beautiful, responsive UI powered by Tailwind CSS and Framer Motion.
+
 
 
 ---
