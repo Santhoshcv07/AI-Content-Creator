@@ -29,6 +29,14 @@ An intelligent, full-stack application that leverages Google's Gemini AI to gene
 
 ## ✨ Key Features
 
+- 🧠 **AI-Powered Generation**: Leverage the power of Google Gemini to generate human-like text and content instantly.
+- 🔐 **Secure Authentication**: Complete auth flows and user management powered by Supabase.
+- 🎨 **Beautiful UI/UX**: Fluid animations (Framer Motion), dark mode support (next-themes), and responsive design (Tailwind CSS).
+- 📄 **Rich Text & Markdown**: Fully supports Markdown rendering for generated content.
+- 📥 **Export to PDF**: Instantly export your generated content into polished PDF documents (`jspdf`).
+- 📊 **Data Visualization**: Integrated charts and analytics utilizing `recharts`.
+- ⚡ **High Performance**: Built on Next.js App Router for optimal speed and SEO.
+
 
 ---
 
