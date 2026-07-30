@@ -130,11 +130,6 @@ This project is optimized for deployment on **Vercel**.
 
 ## 💡 Use Cases
 
-- **Digital Marketers**: Instantly generate ad copy, social media captions, and email newsletters.
-- **Bloggers & Writers**: Overcome writer's block by generating article outlines and full drafts.
-- **Developers**: Automate the creation of technical documentation and READMEs.
-- **Educators & Students**: Generate study guides, quizzes, and summaries of complex topics.
-
 ---
 
 ## 🔮 Future Scope
