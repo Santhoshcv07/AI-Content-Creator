@@ -13,7 +13,6 @@
 [![Gemini API](https://img.shields.io/badge/Google_Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
 
 
-
 An intelligent, full-stack application that leverages Google's Gemini AI to generate, manage, and export high-quality content, built for creators who demand speed and precision.
 
 </div>
